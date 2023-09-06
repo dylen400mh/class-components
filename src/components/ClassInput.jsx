@@ -1,17 +1,18 @@
 /* eslint-disable react/destructuring-assignment */
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class ClassInput extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      todos: ['Just some demo tasks', 'As an example'],
-      inputVal: '',
+      todos: ["Just some demo tasks", "As an example"],
+      inputVal: "",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleInputChange(e) {
@@ -25,7 +26,15 @@ class ClassInput extends Component {
     e.preventDefault();
     this.setState((state) => ({
       todos: state.todos.concat(state.inputVal),
-      inputVal: '',
+      inputVal: "",
+    }));
+  }
+
+  handleDelete(e) {
+    const deletedTodo = e.target.closest("div").id;
+
+    this.setState((state) => ({
+      todos: state.todos.filter((todo) => todo !== deletedTodo),
     }));
   }
 
@@ -50,7 +59,10 @@ class ClassInput extends Component {
         {/* The list of all the To-Do's, displayed */}
         <ul>
           {this.state.todos.map((todo) => (
-            <li key={todo}>{todo}</li>
+            <div id={todo}>
+              <li key={todo}>{todo}</li>
+              <button onClick={this.handleDelete}>Delete</button>
+            </div>
           ))}
         </ul>
       </section>
