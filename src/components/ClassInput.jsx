@@ -1,5 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from "react";
+import Count from "./Count";
 
 class ClassInput extends Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class ClassInput extends Component {
             </div>
           ))}
         </ul>
+        <Count todos={this.state.todos} />
       </section>
     );
   }
